@@ -1,0 +1,14 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    rhapr (0.0.1)
+      yard (~> 0.6)
+    trollop (1.16.2)
+    yard (0.7.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  rhapr
+  trollop

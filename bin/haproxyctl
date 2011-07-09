@@ -11,11 +11,26 @@
 # HAProxyctl is an easy way to do init shit and talk to its stats socket
 #
 
-lib = File.join(File.dirname(__FILE__), 'lib')
-$:.unshift lib unless $:.include?(lib)
+require 'rubygems'
+require 'bundler/setup'
 
-require 'haproxyctl'
-include HAProxyCTL
+Bundler.require :default
+
+opts = Trollop::options do
+  version "haproxyctl v0.1.0"
+  banner <<-BANNER
+Usage:
+        haproxyctl <command> [arguments]
+where <command>'s are:
+BANNER
+
+  opt :monkey, "Use monkey mode"                     # flag --monkey, default false
+  opt :goat, "Use goat mode", :default => true       # flag --goat, default true
+  opt :num_limbs, "Number of limbs", :default => 4   # integer --num-limbs <i>, default to 4
+  opt :num_thumbs, "Number of thumbs", :type => :int # integer --num-thumbs <i>, default nil
+end
+
+raise Trollop::HelpNeeded if ARGV.empty?
 
 argument = ARGV[0]
 
